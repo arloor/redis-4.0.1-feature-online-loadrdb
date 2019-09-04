@@ -2020,3 +2020,5 @@ void xorDigest(unsigned char *digest, void *ptr, size_t len);
     printf("-- MARK %s:%d --\n", __FILE__, __LINE__)
 
 #endif
+
+void loadrdbCommand(client *c);

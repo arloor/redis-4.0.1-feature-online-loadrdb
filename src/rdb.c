@@ -2019,3 +2019,25 @@ void bgsaveCommand(client *c) {
 }
 
 
+void loadrdbCommand(client *c) {
+    //从别的博客抄的，但是阅读源码之后觉得没有必要
+    // if (server.rdb_child_pid != -1) {
+    //     addReplyError(c,"Background save already in progress");
+    // } else if (server.aof_child_pid != -1) {
+    //     addReplyError(c,"Can't BGSAVE while AOF log rewriting is in progress");
+    // } else if (c->argc != 2){
+    if (c->argc != 2){ //实际不需要，在上层有做参数个数校验
+        addReplyStatus(c,"USAGE: LOADRDB <rdbfilename>");
+        return;
+    } else if (rdbLoad(c->argv[1]->ptr,NULL) == C_OK) {
+        serverLog(LL_WARNING,server.rdb_filename);
+        //todo:如果rdbload的参数就是server导出的rdb文件名，则不进行导入，因为会崩溃
+        addReplyStatus(c,"online loadrdb DONE!");
+    } else {
+        addReplyError(c,"online load rdb FAILED! PLEASE check the filename");
+
+    }
+
+
+}
+

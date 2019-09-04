@@ -1011,7 +1011,16 @@ struct commandHelp {
     "destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]",
     "Add multiple sorted sets and store the resulting sorted set in a new key",
     4,
-    "2.0.0" }
+    "2.0.0" },
+    { "LOADRDB",
+
+    "rdb filename",
+
+    "load rdb file online,which can not repeat !!!",
+
+    9,
+
+    "3.0.7"}
 };
 
 #endif

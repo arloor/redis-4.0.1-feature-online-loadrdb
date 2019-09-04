@@ -1,3 +1,16 @@
+这是修改过的redis源码。增加了一个`LOADRDB <filename>`的 命令，用于在运行时动态加载rdb文件。
+
+为什么可以？在阅读了replicate.c后，我发现在从节点收到rdb文件后，直接调用`rdbload`函数加载该文件，这个过程也是在运行时进行的，这就是依据。
+
+test.sh 进行了简单的测试。
+
+下一步需要做的：如果loadrdb指定的filename与redis.conf中指定的`dbfilename`相同，则不进行导入。因为可能在一边写他，一遍读他，后果就是 redis崩溃
+
+参考博客[线上加载rdb、aof]](https://blog.csdn.net/laowxl/article/details/68924510)
+
+
+============================================================
+
 This README is just a fast *quick start* document. You can find more detailed documentation at http://redis.io.
 
 What is Redis?
